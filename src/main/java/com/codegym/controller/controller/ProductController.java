@@ -58,6 +58,22 @@ public class ProductController {
         }
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+    @GetMapping("/get4")
+    public ResponseEntity<Iterable<Product>> get4Product() {
+        List<Product> products = (List<Product>) productService.find4Product();
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(products, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+    @GetMapping("/sort")
+    public ResponseEntity<Iterable<Product>> sortByPrice(@RequestParam("price1") Float price1,@RequestParam("price2") Float price2) {
+        List<Product> products = (List<Product>) productService.sortByPrice(price1,price2);
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(products, HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
     @GetMapping("/viewByCategory/{id}")
     public ResponseEntity<Iterable<Product>> viewProductByCategory(@PathVariable Long id) {
